@@ -32,7 +32,7 @@
                 echo "Erro: $error";
             }
 
-        } elseif($data['type'] === 'edit') {
+        } else if($data['type'] === 'edit') {
             $name = $data['name'];
             $phone = $data['phone'];
             $observations = $data['observations'];
@@ -52,6 +52,23 @@
                 $stmt->execute();
                 $_SESSION['msg'] = "Contato atualizado com sucesso!";
             } catch (PDOException $e) {
+                // erro na conexão
+                $error = $e->getMessage();
+                echo "Erro: $error";
+            }
+            
+        } elseif($data['type'] === 'delete') {
+            $id = $data['id'];
+
+            $query = "DELETE FROM contacts WHERE id = :id";
+
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(":id", $id);
+            
+            try {
+                $stmt->execute();
+                $_SESSION['msg'] = "Contato removido com sucesso!";
+            } catch(PDOException $e) {
                 // erro na conexão
                 $error = $e->getMessage();
                 echo "Erro: $error";

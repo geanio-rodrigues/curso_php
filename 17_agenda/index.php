@@ -3,8 +3,8 @@
 ?>
 
 <div class="container">
-    <?php if(isset($printrMsg) && $printrMsg != ''):?>
-        <p id="msg"><?=$printrMsg?></p>
+    <?php if(isset($printMsg) && $printMsg != ''):?>
+        <p id="msg"><?=$printMsg?></p>
     <?php endif;?>
     <h1 id="main-title">Minha Agenda</h1>
     <?php if(count($contacts) > 0):?>
@@ -26,14 +26,18 @@
                         <td class="actions">
                             <a href="<?=$BASE_URL?>show.php?id=<?=$contact['id']?>"><i class="fas fa-eye check-icon"></i></a>
                             <a href="<?=$BASE_URL?>edit.php?id=<?=$contact['id']?>"><i class="far fa-edit edit-icon"></i></a>
-                            <button type="submit"><i class="fas fa-times delete-icon"></i></button>
+                            <form class="delete-form" action="<?=$BASE_URL?>config/process.php" method="POST">
+                                <input type="hidden" name="type" value="delete">
+                                <input type="hidden" name="id" value="<?=$contact['id']?>">
+                                <button type="submit" class="delete-btn"><i class="fas fa-times delete-icon"></i></button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach;?>
             </tbody>
         </table>
     <?php else:?>
-        <p id="empty-list-text">Ainda não há contatos na sua agenda, <a href="<?=$BASE_URL?>contato.php">clique aqui para adicionar</a>.</p>
+        <P id="empty-list-text">Ainda não há contatos na sua agenda, <a href="<?=$BASE_URL?>create.php">clique aqui para adicionar</a>.</P>
     <?php endif;?>
 </div>
 
