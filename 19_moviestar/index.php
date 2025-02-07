@@ -44,10 +44,10 @@
         </nav>
     </header>
     <div id="main-container" class="container-fluid">
-        <h1>corpo do site</h1>
+        <h1>Corpo do site</h1>
     </div>
     <footer id="footer">
-        <div class="social-container">
+        <div id="social-container">
             <ul>
                 <li>
                     <a href="#"><i class="fab fa-facebook-square"></i></a>
@@ -61,9 +61,11 @@
             </ul>
         </div>
         <div id="footer-links-container">
-            <ul><a href="#">Adicionar filme</a></ul>
-            <ul><a href="#">Adicionar crítica</a></ul>
-            <ul><a href="#">Entrar / Registrar</a></ul>
+            <ul>
+                <li><a href="#">Adicionar filme</a></li>
+                <li><a href="#">Adicionar crítica</a></li>
+                <li><a href="#">Entrar / Registrar</a></li>
+            </ul>
         </div>
         <p>&copy; 2025 Geanio Rodrigues</p>
     </footer>
