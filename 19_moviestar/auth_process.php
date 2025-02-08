@@ -40,8 +40,8 @@
                     $user->name = $name;
                     $user->lastname = $lastname;
                     $user->email = $email;
-                    $user->password = $finalpassword;
-                    $user->token = $token;
+                    $user->password = $finalPassword;
+                    $user->token = $userToken;
 
                     $auth = true;
 
