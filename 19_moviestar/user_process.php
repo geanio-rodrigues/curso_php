@@ -43,6 +43,11 @@
             // Checagem de tipo de imagem
             if(in_array($image["type"], $imageTypes)) {
 
+                // Verifica se o usuário já tem uma imagem de perfil e exclui
+                if (!empty($userData->image) && file_exists("./img/users/" . $userData->image)) {
+                    unlink("./img/users/" . $userData->image);
+                }
+
                 // Chegar se jpg
                 if(in_array($image["type"], $jpgArray)) {
 
