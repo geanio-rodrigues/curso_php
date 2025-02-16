@@ -63,12 +63,12 @@
         <div class="offset-md-1 col-md-10" id="review-container">
             <h3 id="reviews-title">Avaliações:</h3>
             <!-- Verificar se habilita a review para o usuário ou não -->
-             <?php if(!empty($userData) && !$userOwnsMovie && $alreadyReviewd): ?>
+            <?php if(!empty($userData) && !$userOwnsMovie && !$alreadyReviewd): ?>
             <div class="col-md-12" id="review-form-container">
                 <h4>Envie sua avaliação:</h4>
                 <p class="page-description">Preencha o formulário com a nota e comentário sobre o filme</p>
                 <form action="<?=$BASE_URL?>review_process.php" id="review-form" method="POST">
-                    <input type="hidden" name="type" value="createe">
+                    <input type="hidden" name="type" value="create">
                     <input type="hidden" name="movies_id" value="<?=$movie->id?>">
                     <div class="form-group">
                         <label for="rating">Nota do filme:</label>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="form-group">
                         <label for="review">Seu comentário:</label>
-                        <textarea name="review" id="review" class="form-control" placeholder="O que você achou do filme?"></textarea>
+                        <textarea name="review" id="review" rows="3" class="form-control" placeholder="O que você achou do filme?"></textarea>
                     </div>
                     <input type="submit" value="Enviar comentário" class="btn card-btn">
                 </form>
