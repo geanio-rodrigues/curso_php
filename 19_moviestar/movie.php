@@ -101,7 +101,7 @@
                         <h4 class="author-name">
                             <a href="#">Geanio Teste</a>
                         </h4>
-                        <p><i class="fas fa-star"></i></p>
+                        <p><i class="fas fa-star"></i> 9</p>
                     </div>
                     <div class="col-md-12">
                         <p class="comment-title">Comentário:</p>
