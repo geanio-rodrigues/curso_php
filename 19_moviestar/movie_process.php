@@ -97,6 +97,70 @@ if($type === "create") {
         $message->setMessage("Informações inválidas!", "error", "index.php");
     }
 
+} else if($type === "update") {
+
+    // Recerber os dados dos inputs
+    $title = filter_input(INPUT_POST, "title");    
+    $description = filter_input(INPUT_POST, "description");    
+    $trailer = filter_input(INPUT_POST, "trailer");    
+    $category = filter_input(INPUT_POST, "category");    
+    $length = filter_input(INPUT_POST, "length");    
+    $id = filter_input(INPUT_POST, "id");    
+
+    $movie = $movieDao->findById($id);
+
+    // Verifica se encontrou o filme
+    if($movie) {
+
+        // Validação mínima de dados
+        if(!empty($title) && !empty($description) && !empty($category)) {
+
+            // Edição do filme
+            $movie->title = $title;
+            $movie->description = $description;
+            $movie->trailer = $trailer;
+            $movie->category = $category;
+            $movie->length = $length;
+
+            // Upload de imagem do filme
+            if(isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
+
+                $image = $_FILES["image"];
+                $imageTypes = ["image/jpg", "image/jpeg", "image/png"];
+                $jpgArray = ["image/jpg", "image/jpeg"];
+
+                // Checando tipo da imagem
+                if(in_array($image["type"], $imageTypes)) {
+
+                    // Verifica se o usuário já tem uma imagem de perfil e exclui
+                    if (!empty($movie->image) && file_exists("./img/movies/" . $movie->image)) {
+                        unlink("./img/movies/" . $movie->image);
+                    }
+
+                    // Checa se imagem é jpg
+                    if(in_array($image["type"], $jpgArray)) {
+                        $imageFile = imagecreatefromjpeg($image["tmp_name"]);
+                    } else {
+                        $imageFile = imagecreatefrompng($image["tmp_name"]);
+                    }
+
+                    // Gerando o nome da imagem
+
+                    $imageName = $movie->imageGenerateName();
+                    imagejpeg($imageFile, "./img/movies/" . $imageName, 100);
+                    $movie->image = $imageName;
+                } else {
+                    $message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
+                    exit();
+                }
+            }
+
+            $movieDao->update($movie);
+        } else {
+            $message->setMessage("Você precisa adicionar pelo menos: título, descrição e categoria!", "error", "back");
+        }
+    }
+
 } else {
     $message->setMessage("Informações inválidas!", "error", "index.php");
 }
