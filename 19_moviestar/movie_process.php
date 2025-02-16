@@ -144,6 +144,11 @@ if($type === "create") {
                         $imageFile = imagecreatefrompng($image["tmp_name"]);
                     }
 
+                    if(!$imageFile) {
+                        $message->setMessage("Erro ao processar a imagem. Tente novamente com outro arquivo!", "error", "back");
+                        exit();
+                    }
+
                     // Gerando o nome da imagem
 
                     $imageName = $movie->imageGenerateName();
